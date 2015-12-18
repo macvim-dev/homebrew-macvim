@@ -1,0 +1,26 @@
+language: c
+
+os:
+  - osx
+
+osx_image: xcode7.2
+
+compiler:
+  - clang
+
+sudo: false
+
+env:
+  - VIM=/usr/local/bin/vim
+
+script:
+  - brew update || brew update
+  - brew tap macvim-dev/macvim
+  - brew install --HEAD macvim-dev/macvim/macvim || true
+  - $VIM --version
+  - $VIM -c lua 'print(\"MacVim\")' -c q|grep -q -w MacVim
+  - $VIM -c perl 'VIM::Msg(\"MacVim\")' -c q|grep -q -w MacVim
+  - $VIM -c py 'print(\"MacVim\")' -c q|grep -q -w MacVim
+  - $VIM -c ruby 'puts(\"MacVim\")' -c q|grep -q -w MacVim
+
+# vim:set sts=2 sw=2 tw=0 et:
