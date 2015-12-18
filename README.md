@@ -8,5 +8,5 @@
 
 ### Install
 
-    $ brew install --HEAD macvim
+    $ brew install --HEAD macvim-dev/macvim/macvim
 
