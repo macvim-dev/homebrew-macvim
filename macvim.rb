@@ -38,12 +38,15 @@ class Macvim < Formula
 
     bin.install 'src/MacVim/mvim'
     mvim = bin + 'mvim'
-    ['vim', 'vimdiff', 'view', 'mvimdiff', 'mview'].each do |t|
+    [
+      'vim', 'vimdiff', 'view',
+      'gvim', 'gvimdiff', 'gview',
+      'mvimdiff', 'mview'
+    ].each do |t|
       ln_s 'mvim', bin + t
     end
     inreplace mvim do |s|
       s.gsub! /^# (VIM_APP_DIR=).*/, "\\1\"#{prefix}\""
-      s.gsub! /^(binary=).*/, "\\1\"#{prefix}/MacVim.app/Contents/MacOS/Vim\""
     end
   end
 end
