@@ -4,6 +4,8 @@ class Macvim < Formula
   homepage 'https://github.com/macvim-dev/macvim'
   head 'https://github.com/macvim-dev/macvim.git'
 
+  option 'with-properly-linked-python2-python3', 'Link with properly linked Python 2 and Python 3. You will get deadly signal SEGV if you don\'t have properly linked Python 2 and Python 3.'
+
   depends_on 'gettext' => :build
   depends_on 'lua' => :build
   depends_on 'python3' => :build
@@ -17,6 +19,11 @@ class Macvim < Formula
     ENV.append 'vi_cv_dll_name_perl', "/System/Library/Perl/#{perl_version}/darwin-thread-multi-2level/CORE/libperl.dylib"
     ENV.append 'vi_cv_dll_name_python3', "#{HOMEBREW_PREFIX}/Frameworks/Python.framework/Versions/3.5/Python"
 
+    opts = []
+    if build.with? 'properly-linked-python2-python3'
+      opts << '--with-properly-linked-python2-python3'
+    end
+
     system './configure', "--prefix=#{prefix}",
                           '--with-features=huge',
                           '--enable-multibyte',
@@ -29,7 +36,8 @@ class Macvim < Formula
                           '--enable-rubyinterp=dynamic',
                           '--with-ruby-command=/usr/bin/ruby',
                           '--enable-luainterp=dynamic',
-                          "--with-lua-prefix=#{HOMEBREW_PREFIX}"
+                          "--with-lua-prefix=#{HOMEBREW_PREFIX}",
+                          *opts
 
     system 'make'
 
