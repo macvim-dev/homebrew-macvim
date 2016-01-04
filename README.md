@@ -10,7 +10,7 @@
 
  2. Tap MacVim formula
 
-    $ brew tap macvim-dev/macvim
+   `$ brew tap macvim-dev/macvim`
 
 ### Install
 
