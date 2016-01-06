@@ -1,4 +1,4 @@
-# Homebrew Tap for MacVim
+# Homebrew Tap for MacVim [![Build Status](https://travis-ci.org/macvim-dev/homebrew-macvim.svg?branch=master)](https://travis-ci.org/macvim-dev/homebrew-macvim)
 
 ## Usage
 
