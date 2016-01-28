@@ -11,16 +11,16 @@ compiler:
 sudo: false
 
 env:
-  - VIM=/usr/local/bin/vim
+  - VIMCMD=/usr/local/Cellar/macvim/HEAD/MacVim.app/Contents/MacOS/Vim
 
 script:
   - brew update || brew update
   - brew tap macvim-dev/macvim
   - brew install --HEAD macvim-dev/macvim/macvim || true
-  - $VIM --version
-  - $VIM -c lua 'print(\"MacVim\")' -c q|grep -q -w MacVim
-  - $VIM -c perl 'VIM::Msg(\"MacVim\")' -c q|grep -q -w MacVim
-  - $VIM -c py 'print(\"MacVim\")' -c q|grep -q -w MacVim
-  - $VIM -c ruby 'puts(\"MacVim\")' -c q|grep -q -w MacVim
+  - rm -f result; $VIMCMD -g -c "redir>result" -c "lua print(\"Test\")" -c "redir END" -c q; sleep 1; cat result; echo; grep -q -w Test result
+  - rm -f result; $VIMCMD -g -c "redir>result" -c "perl VIM::Msg(\"Test\")" -c "redir END" -c q; sleep 1; cat result; echo; grep -q -w Test result
+  - rm -f result; $VIMCMD -g -c "redir>result" -c "py print(\"Test\")" -c "redir END" -c q; sleep 1; cat result; echo; grep -q -w Test result
+  - rm -f result; $VIMCMD -g -c "redir>result" -c "py3 print(\"Test\")" -c "redir END" -c q; sleep 1; cat result; echo; grep -q -w Test result
+  - rm -f result; $VIMCMD -g -c "redir>result" -c "ruby puts(\"Test\")" -c "redir END" -c q; sleep 1; cat result; echo; grep -q -w Test result
 
 # vim:set sts=2 sw=2 tw=0 et:
