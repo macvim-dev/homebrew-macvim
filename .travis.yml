@@ -17,10 +17,10 @@ script:
   - brew update || brew update
   - brew tap macvim-dev/macvim
   - brew install --HEAD macvim-dev/macvim/macvim || true
-  - rm -f result; $VIMCMD -g -c "redir>result" -c "lua print(\"Test\")" -c "redir END" -c q; sleep 1; cat result; echo; grep -q -w Test result
-  - rm -f result; $VIMCMD -g -c "redir>result" -c "perl VIM::Msg(\"Test\")" -c "redir END" -c q; sleep 1; cat result; echo; grep -q -w Test result
-  - rm -f result; $VIMCMD -g -c "redir>result" -c "py print(\"Test\")" -c "redir END" -c q; sleep 1; cat result; echo; grep -q -w Test result
-  - rm -f result; $VIMCMD -g -c "redir>result" -c "py3 print(\"Test\")" -c "redir END" -c q; sleep 1; cat result; echo; grep -q -w Test result
-  - rm -f result; $VIMCMD -g -c "redir>result" -c "ruby puts(\"Test\")" -c "redir END" -c q; sleep 1; cat result; echo; grep -q -w Test result
+  - rm -f result; $VIMCMD -g -f -c "redir>result" -c "lua print(\"Test\")" -c "redir END" -c q; cat result; echo; grep -q -w Test result
+  - rm -f result; $VIMCMD -g -f -c "redir>result" -c "perl VIM::Msg(\"Test\")" -c "redir END" -c q; cat result; echo; grep -q -w Test result
+  - rm -f result; $VIMCMD -g -f -c "redir>result" -c "py print(\"Test\")" -c "redir END" -c q; cat result; echo; grep -q -w Test result
+  - rm -f result; $VIMCMD -g -f -c "redir>result" -c "py3 print(\"Test\")" -c "redir END" -c q; cat result; echo; grep -q -w Test result
+  - rm -f result; $VIMCMD -g -f -c "redir>result" -c "ruby puts(\"Test\")" -c "redir END" -c q; cat result; echo; grep -q -w Test result
 
 # vim:set sts=2 sw=2 tw=0 et:
