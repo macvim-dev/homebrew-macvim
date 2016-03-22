@@ -1,6 +1,7 @@
 require 'formula'
 
 class Macvim < Formula
+  desc 'GUI for vim, made for OS X'
   homepage 'https://github.com/macvim-dev/macvim'
   head 'https://github.com/macvim-dev/macvim.git'
 
@@ -56,5 +57,14 @@ class Macvim < Formula
     inreplace mvim do |s|
       s.gsub! /^# (VIM_APP_DIR=).*/, "\\1\"#{prefix}\""
     end
+  end
+
+  test do
+    (testpath/'a').write 'hai'
+    (testpath/'b').write 'bai'
+    system bin/'vimdiff', 'a', 'b',
+           '-c', 'FormatCommand diffformat',
+           '-c', 'w! diff.html', '-c', 'qa!'
+    File.exist? 'diff.html'
   end
 end
