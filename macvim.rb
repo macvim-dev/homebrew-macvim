@@ -31,6 +31,7 @@ class Macvim < Formula
                           '--enable-netbeans',
                           '--with-tlib=ncurses',
                           '--enable-cscope',
+                          '--enable-termtruecolor',
                           '--enable-perlinterp=dynamic',
                           '--enable-pythoninterp=dynamic',
                           '--enable-python3interp=dynamic',
