@@ -11,7 +11,7 @@ compiler:
 sudo: false
 
 env:
-  - VIMCMD=/usr/local/Cellar/macvim/HEAD/MacVim.app/Contents/MacOS/Vim
+  - VIMCMD=/usr/local/Cellar/macvim/HEAD-*/MacVim.app/Contents/MacOS/Vim
 
 script:
   - brew update || brew update
