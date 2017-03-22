@@ -11,6 +11,15 @@ class Macvim < Formula
   depends_on 'lua' => :build
   depends_on :python3 => :build
 
+  def get_path(name)
+    f = Formulary.factory(name)
+    if f.rack.directory?
+      kegs = f.rack.subdirs.map { |keg| Keg.new(keg) }.sort_by(&:version)
+      return kegs.last.to_s unless kegs.empty?
+    end
+    nil
+  end
+
   def install
     perl_version = '5.16'
     ENV.append 'VERSIONER_PERL_VERSION', perl_version
@@ -43,7 +52,17 @@ class Macvim < Formula
 
     system 'make'
 
-    prefix.install 'src/MacVim/build/Release/MacVim.app'
+    apppath = 'src/MacVim/build/Release/MacVim.app'
+
+    instance_variable_set("@gettext", get_path("gettext"))
+    system "PATH=#{@gettext}/bin:$PATH " +
+           "MSGFMT=#{@gettext}/bin/msgfmt " +
+           'INSTALL_DATA=install ' +
+           'FILEMOD=644 ' +
+           "LOCALEDIR=../../#{apppath}/Contents/Resources/vim/runtime/lang " +
+           'make -C src/po install'
+
+    prefix.install apppath
     bin = prefix + 'bin'
 
     bin.install 'src/MacVim/mvim'
