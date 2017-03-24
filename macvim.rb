@@ -45,7 +45,6 @@ class Macvim < Formula
                           '--enable-pythoninterp=dynamic',
                           '--enable-python3interp=dynamic',
                           '--enable-rubyinterp=dynamic',
-                          '--with-ruby-command=/usr/bin/ruby',
                           '--enable-luainterp=dynamic',
                           "--with-lua-prefix=#{HOMEBREW_PREFIX}",
                           *opts
