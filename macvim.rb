@@ -62,19 +62,29 @@ class Macvim < Formula
            'make -C src/po install'
 
     prefix.install apppath
-    bin = prefix + 'bin'
 
-    bin.install 'src/MacVim/mvim'
-    mvim = bin + 'mvim'
+    appbin = prefix + "MacVim.app/Contents/bin"
+    mkdir_p appbin
+
+    bin = prefix + 'bin'
+    mkdir_p bin
+
+    mvim = appbin + "mvim"
+    cp 'src/MacVim/mvim.sh', mvim
+    chmod 0755, mvim
+
     [
-      'vim', 'vimdiff', 'view',
-      'gvim', 'gvimdiff', 'gview',
-      'mvimdiff', 'mview'
-    ].each do |t|
-      ln_s 'mvim', bin + t
-    end
-    inreplace mvim do |s|
-      s.gsub! /^# (VIM_APP_DIR=).*/, "\\1\"#{prefix}\""
+      {:path => appbin, :src => 'mvim'},
+      {:path => bin, :src => '../MacVim.app/Contents/bin/mvim'},
+    ].each do |link|
+      [
+        'vim', 'vimdiff', 'view',
+        'gvim', 'gvimdiff', 'gview',
+        'mvim', 'mvimdiff', 'mview'
+      ].each do |t|
+        dst = link[:path] + t
+        ln_s link[:src], dst unless File.exists? dst
+      end
     end
   end
 
