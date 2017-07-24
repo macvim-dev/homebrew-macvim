@@ -37,6 +37,7 @@ class Macvim < Formula
     system './configure', "--prefix=#{prefix}",
                           '--with-features=huge',
                           '--enable-multibyte',
+                          '--enable-terminal',
                           '--enable-netbeans',
                           '--with-tlib=ncurses',
                           '--enable-cscope',
