@@ -9,7 +9,7 @@ class Macvim < Formula
 
   depends_on 'gettext' => :build
   depends_on 'lua' => :build
-  depends_on :python3 => :build
+  depends_on 'python3' => :build
 
   def get_path(name)
     f = Formulary.factory(name)
